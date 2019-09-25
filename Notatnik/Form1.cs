@@ -85,9 +85,25 @@ namespace Notatnik
             }
         }
 
-        private string[] CzytajPlikTekstowy(string nazwaPliku)
+        public static string[] CzytajPlikTekstowy(string nazwaPliku)
         {
-            throw new NotImplementedException();
+            List<string> tekst = new List<string>;
+            try
+            {
+                using (StreamReader sr = new StreamReader(nazwaPliku))
+                {
+                    string wiersz;
+                    while ((wiersz = sr.ReadLine()) != null)
+                        tekst.Add(wiersz);
+                }
+                return tekst.ToArray();
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Błąd odczytu pliku" + nazwaPliku + "\nOpis wyjątku: " + e.Message, "Notatnik - Błąd przy wczytywaniu pliku", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
     }
 }
