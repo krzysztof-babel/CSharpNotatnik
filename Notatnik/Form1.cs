@@ -87,7 +87,7 @@ namespace Notatnik
 
         public static string[] CzytajPlikTekstowy(string nazwaPliku)
         {
-            List<string> tekst = new List<string>;
+            List<string> tekst = new List<string>();
             try
             {
                 using (StreamReader sr = new StreamReader(nazwaPliku))
