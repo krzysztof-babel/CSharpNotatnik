@@ -35,6 +35,7 @@ namespace Notatnik
         #region Metoda Zamknij
         private void zamknijToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //close application
             Close();
         }
         #endregion
