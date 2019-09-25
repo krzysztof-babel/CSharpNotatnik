@@ -72,5 +72,22 @@ namespace Notatnik
             }
         }
         #endregion
+
+        public void otworzToolStripMenuItem(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string nazwaPliku = openFileDialog1.FileName;
+                textBox1.Lines = CzytajPlikTekstowy(nazwaPliku);
+                int ostatniSlash = nazwaPliku.LastIndexOf('\\');
+                toolStripStatusLabel1.Text = nazwaPliku.Substring(ostatniSlash + 1, nazwaPliku.Length - 1);
+                tekstZmieniony = false;
+            }
+        }
+
+        private string[] CzytajPlikTekstowy(string nazwaPliku)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
