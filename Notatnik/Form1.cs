@@ -81,6 +81,7 @@ namespace Notatnik
                 textBox1.Lines = CzytajPlikTekstowy(nazwaPliku);
                 int ostatniSlash = nazwaPliku.LastIndexOf('\\');
                 toolStripStatusLabel1.Text = nazwaPliku.Substring(ostatniSlash + 1, nazwaPliku.Length - 1);
+                toolStripStatusLabel1.Text = nazwaPliku.Substring(ostatniSlash + 1, nazwaPliku.Length - ostatniSlash - 1);
                 tekstZmieniony = false;
             }
         }
@@ -105,5 +106,53 @@ namespace Notatnik
                 return null;
             }
         }
-    }
-}
+        #region FormClosing
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!tekstZmieniony) return;
+            {
+                DialogResult dr = MessageBox.Show("Czy zapisać zmiany w edytowanym dokumencie", this.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3);
+
+                switch (dr)
+                {
+                    case DialogResult.Yes:
+                        zapiszJakoToolStripMenuItem_Click
+                            (null, null); break;
+                    case DialogResult.No:
+                        break;
+                    case DialogResult.Cancel:
+                        e.Cancel = true;
+                        break;
+                    default: e.Cancel = true;
+                        break;
+
+                    /*case DialogResult.None:
+                        break;
+                    case DialogResult.OK:
+                        break;
+                    case DialogResult.Cancel:
+                        break;
+                    case DialogResult.Abort:
+                        break;
+                    case DialogResult.Retry:
+                        break;
+                    case DialogResult.Ignore:
+                        break;
+                    case DialogResult.Yes:
+                        break;
+                    case DialogResult.No:
+                        break;
+                    default:
+                        break;*/
+                }
+            }
+        }
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            tekstZmieniony = true;
+        }
+        #endregion
+
+
+    } //class
+} //namespace
